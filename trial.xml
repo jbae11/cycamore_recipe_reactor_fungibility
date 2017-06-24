@@ -1,0 +1,310 @@
+<simulation>
+  <control>
+    <duration>120</duration>
+    <startmonth>1</startmonth>
+    <startyear>2000</startyear>
+  </control>
+
+  <archetypes>
+    <spec><lib>cycamore</lib><name>Sink</name></spec>
+    <spec><lib>cycamore</lib><name>Source</name></spec>
+    <spec><lib>cycamore</lib><name>Reactor</name></spec>
+    <spec><lib>agents</lib><name>NullRegion</name></spec>
+    <spec><lib>cycamore</lib><name>DeployInst</name></spec>
+  </archetypes>
+
+  <facility>
+    <name>fuel_source</name>
+    <config>
+      <Source>
+        <outcommod>fuel</outcommod>
+        <outrecipe>uox_recipe</outrecipe>
+        <throughput>1000</throughput>
+      </Source>
+    </config>
+  </facility>
+
+  <facility>
+    <name>impurity_source</name>
+    <config>
+      <Source>
+        <outcommod>fuel</outcommod>
+        <outrecipe>cox_recipe</outrecipe>
+        <throughput>1000</throughput>
+      </Source>
+    </config>
+  </facility>
+
+  <facility>
+    <name>impurity_source_2</name>
+    <config>
+      <Source>
+        <outcommod>fuel</outcommod>
+        <outrecipe>cox_recipe_two</outrecipe>
+        <throughput>1000</throughput>
+      </Source>
+    </config>
+  </facility>
+
+  <facility>
+    <name>impurity_source_3</name>
+    <config>
+      <Source>
+        <outcommod>fuel</outcommod>
+        <outrecipe>cox_recipe_three</outrecipe>
+        <throughput>1000</throughput>
+      </Source>
+    </config>
+  </facility>
+
+  <facility>
+    <name>impurity_source_4</name>
+    <config>
+      <Source>
+        <outcommod>fuel</outcommod>
+        <outrecipe>cox_recipe_four</outrecipe>
+        <throughput>1000</throughput>
+      </Source>
+    </config>
+  </facility>
+
+  <facility>
+    <name>control</name>
+    <config>
+      <Source>
+        <outcommod>not_fuel</outcommod>
+        <outrecipe>uox_recipe</outrecipe>
+        <throughput>1000</throughput>
+      </Source>
+    </config>
+  </facility>
+
+  <facility>
+    <name>Reactor</name>
+    <config>
+      <Reactor>
+        <fuel_inrecipes>         
+        <val>uox_recipe</val>
+        </fuel_inrecipes>
+
+        <fuel_outrecipes>        <val>used_fuel_recipe</val>         </fuel_outrecipes>
+        
+        <fuel_incommods>
+        <val>fuel</val>
+        </fuel_incommods>
+        
+        <fuel_outcommods>         <val>waste</val>                   </fuel_outcommods>
+
+
+        <cycle_time>1</cycle_time>
+        <refuel_time>0</refuel_time>
+        <assem_size>2</assem_size>
+        <n_assem_core>1</n_assem_core>
+        <n_assem_batch>1</n_assem_batch>
+        <power_name>power</power_name>
+        <power_cap>10</power_cap>
+      </Reactor>
+    </config>
+  </facility>
+
+  <facility>
+    <name>Sink</name>
+    <config>
+      <Sink>
+        <in_commods>
+          <val>waste</val>
+        </in_commods>
+        <capacity>1000</capacity>
+      </Sink>
+    </config>
+  </facility>
+
+  <region>
+    <name>SingleRegion</name>
+    <config> <NullRegion/> </config>
+    <institution>
+      <config>
+        <DeployInst>
+
+          <build_times>
+            <val>1</val>
+            <val>1</val>
+            <val>20</val>
+            <val>40</val>
+            <val>60</val>
+            <val>80</val>
+            <val>100</val>
+          </build_times>
+
+          <n_build>
+            <val>50</val>
+            <val>1</val>
+            <val>1</val>
+            <val>1</val>
+            <val>1</val>
+            <val>1</val>
+            <val>1</val>
+          </n_build>
+
+          <prototypes>
+            <val>Reactor</val>
+            <val>fuel_source</val>
+            <val>impurity_source</val>
+            <val>impurity_source_2</val>
+            <val>impurity_source_3</val>
+            <val>impurity_source_4</val>
+            <val>control</val>
+          </prototypes>
+
+          <lifetimes>
+            <val>9999</val>
+            <val>20</val>
+            <val>20</val>
+            <val>20</val>
+            <val>20</val>
+            <val>20</val>
+            <val>20</val>
+          </lifetimes>
+
+        </DeployInst>
+      </config>
+      <name>utility</name>
+    </institution>
+  </region>
+
+
+<!-- Recipes -->
+
+
+  <recipe>
+    <name>uox_recipe</name>
+    <basis>mass</basis>
+    <nuclide>
+      <id>922350000</id>
+      <comp>4.5</comp>
+    </nuclide>
+    <nuclide>
+      <id>922380000</id>
+      <comp>95.5</comp>
+    </nuclide>
+  </recipe>
+
+  <recipe>
+    <name>used_fuel_recipe</name>
+    <basis>mass</basis>
+    <nuclide>
+      <id>922350000</id>
+      <comp>4.5</comp>
+    </nuclide>
+    <nuclide>
+      <id>922380000</id>
+      <comp>95.5</comp>
+    </nuclide>
+  </recipe>
+
+    <recipe>
+    <name>cox_recipe</name>
+    <basis>mass</basis>
+    <nuclide>
+      <id>922350000</id>
+      <comp>4.0</comp>
+    </nuclide>
+    <nuclide>
+      <id>922380000</id>
+      <comp>95.5</comp>
+    </nuclide>
+    <nuclide>
+      <id>942390000</id>
+      <comp>0.5</comp>
+    </nuclide>
+  </recipe>
+
+  <recipe>
+    <name>cox_recipe_two</name>
+    <basis>mass</basis>
+    <nuclide>
+      <id>922350000</id>
+      <comp>4.0</comp>
+    </nuclide>
+    <nuclide>
+      <id>922380000</id>
+      <comp>95</comp>
+    </nuclide>
+    <nuclide>
+      <id>942390000</id>
+      <comp>0.5</comp>
+    </nuclide>
+    <nuclide>
+      <id>10010000</id>
+      <comp>0.5</comp>
+    </nuclide>
+  </recipe>
+
+  <recipe>
+    <name>cox_recipe_three</name>
+    <basis>mass</basis>
+    <nuclide>
+      <comp>156.729</comp>
+      <id>U235</id>
+    </nuclide>
+    <nuclide>
+      <comp>102.103</comp>
+      <id>U236</id>
+    </nuclide>
+    <nuclide>
+      <comp>18280.324</comp>
+      <id>U238</id>
+    </nuclide>
+    <nuclide>
+      <comp>13.656</comp>
+      <id>Np237</id>
+    </nuclide>
+    <nuclide>
+      <comp>5.043</comp>
+      <id>Pu238</id>
+    </nuclide>
+    <nuclide>
+      <comp>106.343</comp>
+      <id>Pu239</id>
+    </nuclide>
+    <nuclide>
+      <comp>41.357</comp>
+      <id>Pu240</id>
+    </nuclide>
+    <nuclide>
+      <comp>36.477</comp>
+      <id>Pu241</id>
+    </nuclide>
+    <nuclide>
+      <comp>15.387</comp>
+      <id>Pu242</id>
+    </nuclide>
+    <nuclide>
+      <comp>1.234</comp>
+      <id>Am241</id>
+    </nuclide>
+    <nuclide>
+      <comp>3.607</comp>
+      <id>Am243</id>
+    </nuclide>
+    <nuclide>
+      <comp>0.431</comp>
+      <id>Cm244</id>
+    </nuclide>
+    <nuclide>
+      <comp>1.263</comp>
+      <id>Cm245</id>
+    </nuclide>
+  </recipe>
+
+
+  <recipe>
+    <name>cox_recipe_four</name>
+    <basis>mass</basis>
+    <nuclide>
+      <id>10010000</id>
+      <comp>100</comp>
+    </nuclide>
+  </recipe>
+
+</simulation>
